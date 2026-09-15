@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AirStayPerth — Futuristic Concept</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0e1412;
+  --bg2:#151d19;
+  --ink:#f4f7f4;
+  --muted:#9eaaa3;
+  --green:#6ce0aa;
+  --green2:#2d7d59;
+  --cream:#efe8dc;
+  --dark:#111714;
+  --glass:rgba(255,255,255,.07);
+  --glass2:rgba(255,255,255,.12);
+  --line:rgba(255,255,255,.11);
+  --shadow:0 45px 120px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 20% 10%, rgba(108,224,170,.10), transparent 24%),
+    radial-gradient(circle at 85% 18%, rgba(45,125,89,.15), transparent 30%),
+    linear-gradient(180deg,#0c1210,#111815 60%,#0c1210);
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+img{width:100%;height:100%;object-fit:cover;display:block}
+.shell{width:min(1220px,calc(100% - 34px));margin:auto}
+h1,h2,h3{font-family:'Manrope',sans-serif}
+
+nav{
+  position:fixed;inset:16px 0 auto;z-index:50;
+}
+.navbar{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:18px;padding:11px 12px 11px 18px;
+  background:rgba(12,18,16,.62);backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,.11);
+  border-radius:999px;
+  box-shadow:0 18px 50px rgba(0,0,0,.22);
+}
+.brand{
+  font:800 1.03rem 'Manrope';letter-spacing:-.04em;
+}
+.brand span{color:var(--green)}
+.nav-links{display:flex;gap:24px;color:#b7c2bc;font-size:.88rem}
+.nav-actions{display:flex;gap:8px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  gap:8px;padding:12px 18px;border-radius:999px;
+  font-weight:700;font-size:.88rem;border:1px solid transparent;
+  transition:.25s ease;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:var(--green);color:#0c1511;box-shadow:0 12px 30px rgba(108,224,170,.18)}
+.btn-ghost{border-color:var(--line);background:rgba(255,255,255,.04)}
+.btn-light{background:#f7f7f3;color:#152019}
+
+.hero{
+  min-height:100vh;padding:140px 0 80px;
+  display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;
+}
+.kicker{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:.74rem;text-transform:uppercase;letter-spacing:.16em;
+  font-weight:800;color:var(--green);margin-bottom:18px;
+}
+.kicker:before{content:"";width:32px;height:1px;background:var(--green)}
+h1{
+  font-size:clamp(3.8rem,7.5vw,7.5rem);
+  line-height:.86;letter-spacing:-.075em;
+  margin-bottom:24px;max-width:740px;
+}
+.hero p{
+  color:var(--muted);font-size:1.08rem;line-height:1.75;
+  max-width:600px;margin-bottom:28px;
+}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap}
+
+.stage{
+  min-height:630px;perspective:1400px;position:relative;
+}
+.house-scene{
+  position:absolute;inset:35px 10px 15px 30px;
+  transform-style:preserve-3d;
+  transform:rotateX(6deg) rotateY(-12deg);
+  transition:transform .18s ease-out;
+}
+.house-base{
+  position:absolute;left:10%;right:7%;bottom:13%;height:62%;
+  border-radius:34px 34px 18px 18px;
+  background:linear-gradient(145deg,#ece7dd,#b8bcb5);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+.house-base:before{
+  content:"";position:absolute;left:0;right:0;top:0;height:25%;
+  background:linear-gradient(160deg,#dcd9d1,#8e958f);
+}
+.window{
+  position:absolute;background:linear-gradient(180deg,#76d3b3,#2e7760);
+  box-shadow:inset 0 0 35px rgba(0,0,0,.15),0 0 40px rgba(108,224,170,.12);
+  border:7px solid #d7d5cf;border-radius:6px;
+}
+.w1{left:9%;top:34%;width:24%;height:23%}
+.w2{left:39%;top:34%;width:24%;height:23%}
+.w3{right:7%;top:34%;width:24%;height:23%}
+.door{
+  position:absolute;left:43%;bottom:0;width:14%;height:30%;
+  background:linear-gradient(180deg,#4e5e56,#27322d);
+  border:7px solid #d7d5cf;border-bottom:0;border-radius:7px 7px 0 0;
+}
+.ground{
+  position:absolute;left:3%;right:3%;bottom:7%;height:10%;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(108,224,170,.22),transparent 65%);
+  filter:blur(10px);
+}
+.orbit{
+  position:absolute;border:1px solid rgba(108,224,170,.22);
+  border-radius:50%;animation:spin 13s linear infinite;
+}
+.orbit.one{width:90%;height:46%;left:5%;top:28%;transform:rotateX(66deg)}
+.orbit.two{width:72%;height:38%;left:14%;top:32%;transform:rotateX(66deg);animation-duration:18s}
+@keyframes spin{to{transform:rotateX(66deg) rotateZ(360deg)}}
+
+.float-chip{
+  position:absolute;z-index:3;padding:12px 15px;
+  background:rgba(18,26,22,.72);backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,.1);border-radius:18px;
+  box-shadow:0 20px 50px rgba(0,0,0,.25);
+  animation:float 4.8s ease-in-out infinite;
+}
+.float-chip b{display:block;font-size:.84rem;margin-bottom:2px}
+.float-chip span{font-size:.74rem;color:var(--muted)}
+.c1{left:-5px;top:100px}
+.c2{right:-15px;top:190px;animation-delay:-1.5s}
+.c3{left:30px;bottom:100px;animation-delay:-3s}
+@keyframes float{50%{transform:translateY(-9px)}}
+
+.stats-wrap{padding:14px 0 90px}
+.stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.stat{padding:28px 24px}
+.stat:not(:last-child){border-right:1px solid var(--line)}
+.stat b{
+  display:block;font:800 clamp(1.9rem,4vw,3.2rem) 'Manrope';
+  letter-spacing:-.05em;margin-bottom:5px;color:white;
+}
+.stat span{font-size:.8rem;color:var(--muted)}
+
+.section{padding:105px 0}
+.section-head{
+  display:flex;align-items:end;justify-content:space-between;
+  gap:28px;margin-bottom:38px;
+}
+.section-head h2{
+  font-size:clamp(2.5rem,5vw,4.8rem);
+  line-height:.95;letter-spacing:-.055em;max-width:760px;
+}
+.section-head p{max-width:500px;color:var(--muted);line-height:1.7}
+
+.property{
+  background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.025));
+  border:1px solid var(--line);border-radius:30px;
+  padding:14px;margin-bottom:24px;
+}
+.property-top{
+  display:flex;justify-content:space-between;align-items:end;
+  gap:20px;padding:14px 10px 22px;
+}
+.property-top h3{font-size:1.85rem;letter-spacing:-.04em;margin-bottom:5px}
+.property-top .loc{color:var(--muted);font-size:.88rem}
+.property-top .meta{color:var(--muted);font-size:.8rem;text-align:right}
+
+.rooms{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.room{
+  background:#f5f3ee;color:#1a241f;border-radius:22px;overflow:hidden;
+  transition:.28s ease;transform-style:preserve-3d;
+}
+.room:hover{transform:translateY(-7px) rotateX(1deg)}
+.room-img{height:215px;position:relative;overflow:hidden}
+.room-img img{transition:transform .45s ease}
+.room:hover .room-img img{transform:scale(1.035)}
+.tag{
+  position:absolute;left:12px;top:12px;
+  background:rgba(255,255,255,.9);padding:7px 10px;border-radius:999px;
+  font-size:.71rem;font-weight:800;
+}
+.room-body{padding:18px}
+.room-body h4{font:700 1rem 'Manrope';margin-bottom:5px}
+.room-body .info{font-size:.8rem;color:#667169;line-height:1.45}
+.room-foot{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-top:15px;padding-top:13px;border-top:1px solid rgba(0,0,0,.08);
+}
+.rating{font-size:.8rem;font-weight:800}
+.link{font-size:.8rem;font-weight:800;color:var(--green2)}
+
+.flow{
+  min-height:520px;border-radius:36px;
+  background:
+    radial-gradient(circle at 80% 10%,rgba(108,224,170,.14),transparent 24%),
+    #141d19;
+  border:1px solid var(--line);
+  display:grid;grid-template-columns:1.05fr .95fr;gap:50px;align-items:center;
+  padding:52px;overflow:hidden;position:relative;
+}
+.flow h2{
+  font-size:clamp(2.8rem,5vw,4.9rem);
+  line-height:.94;letter-spacing:-.06em;margin-bottom:18px;
+}
+.flow p{color:var(--muted);line-height:1.7;max-width:520px}
+.flow-steps{display:grid;gap:12px}
+.flow-step{
+  display:grid;grid-template-columns:44px 1fr;gap:14px;
+  padding:16px;border-radius:18px;
+  background:rgba(255,255,255,.06);border:1px solid var(--line);
+  transform:translateX(0);transition:.25s ease;
+}
+.flow-step:hover{transform:translateX(6px)}
+.flow-step b{
+  width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+  background:var(--green);color:#0c1511;font-size:.75rem;
+}
+.flow-step strong{display:block;margin:2px 0 4px}
+.flow-step span{font-size:.82rem;color:var(--muted)}
+
+.owner{
+  display:grid;grid-template-columns:.95fr 1.05fr;gap:26px;
+}
+.owner-visual{
+  min-height:540px;border-radius:34px;overflow:hidden;
+  position:relative;box-shadow:var(--shadow);
+}
+.owner-visual:after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(10,15,13,.72),transparent 58%);
+}
+.owner-copy{
+  background:#f0ece3;color:#1a241f;border-radius:34px;
+  padding:40px;border:1px solid rgba(255,255,255,.7)
+}
+.owner-copy h2{
+  font-size:clamp(2.6rem,5vw,4.5rem);line-height:.95;letter-spacing:-.055em;
+  margin-bottom:18px;
+}
+.owner-copy>p{color:#657169;line-height:1.7;margin-bottom:24px}
+.owner-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}
+.owner-point{font-size:.84rem;color:#48544d}
+.owner-form{
+  margin-top:18px;padding-top:20px;border-top:1px solid rgba(0,0,0,.12)
+}
+.owner-form .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.owner-form input,.owner-form textarea{
+  width:100%;border:1px solid rgba(0,0,0,.12);
+  border-radius:12px;background:white;padding:12px 13px;
+  font:inherit;margin-bottom:10px;color:#16211b;
+}
+.owner-form textarea{min-height:92px;resize:vertical}
+
+.cta{text-align:center;padding:120px 0 110px}
+.cta h2{
+  font-size:clamp(3.2rem,7vw,6.5rem);
+  line-height:.9;letter-spacing:-.075em;max-width:900px;margin:0 auto 22px;
+}
+.cta p{max-width:620px;margin:0 auto 24px;color:var(--muted);line-height:1.7}
+
+footer{border-top:1px solid var(--line);padding:30px 0 48px}
+.footer-row{display:flex;justify-content:space-between;gap:22px;flex-wrap:wrap;color:var(--muted);font-size:.82rem}
+
+.glow{
+  position:absolute;width:10px;height:10px;border-radius:50%;
+  background:var(--green);box-shadow:0 0 18px 7px rgba(108,224,170,.23);
+}
+
+@media(max-width:960px){
+  .nav-links{display:none}
+  .hero,.flow,.owner{grid-template-columns:1fr}
+  .stage{min-height:520px}
+  .rooms{grid-template-columns:1fr 1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:nth-child(2){border-right:0}
+  .stat:nth-child(-n+2){border-bottom:1px solid var(--line)}
+}
+@media(max-width:650px){
+  .shell{width:min(100% - 22px,1220px)}
+  .nav-actions .btn-ghost{display:none}
+  h1{font-size:3.6rem}
+  .stage{min-height:400px}
+  .float-chip{display:none}
+  .section-head{align-items:start;flex-direction:column}
+  .rooms,.owner-grid,.owner-form .row{grid-template-columns:1fr}
+  .property-top{align-items:start;flex-direction:column}
+  .property-top .meta{text-align:left}
+  .flow{padding:34px 22px}
+  .owner-copy{padding:30px 22px}
+  .stats{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="shell navbar">
+    <a href="#" class="brand"><span>AirStay</span>Perth</a>
+    <div class="nav-links">
+      <a href="#stays">Stays</a>
+      <a href="#experience">Experience</a>
+      <a href="#owners">Partner with us</a>
+    </div>
+    <div class="nav-actions">
+      <a href="#owners" class="btn btn-ghost">Partner with AirStay</a>
+      <a href="#stays" class="btn btn-primary">Find a stay</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <section class="shell hero">
+    <div>
+      <div class="kicker">AirStayPerth · Perth accommodation</div>
+      <h1>Stay simple.<br>Arrive smarter.</h1>
+      <p>
+        Modern private stays around Perth, designed for easy arrivals, self check-in and practical short stays.
+        Built for FIFO workers, business travellers and guests who want a clean room without the hotel fuss.
+      </p>
+      <div class="hero-actions">
+        <a href="#stays" class="btn btn-primary">Explore stays</a>
+        <a href="#owners" class="btn btn-ghost">Partner with AirStay</a>
+      </div>
+    </div>
+
+    <div class="stage" id="stage">
+      <div class="house-scene" id="scene">
+        <div class="ground"></div>
+        <div class="orbit one"></div>
+        <div class="orbit two"></div>
+        <div class="house-base">
+          <div class="window w1"></div>
+          <div class="window w2"></div>
+          <div class="window w3"></div>
+          <div class="door"></div>
+        </div>
+        <div class="glow" style="left:22%;top:39%"></div>
+        <div class="glow" style="left:50%;top:39%"></div>
+        <div class="glow" style="right:17%;top:39%"></div>
+      </div>
+      <div class="float-chip c1"><b>Self check-in</b><span>Arrive on your schedule</span></div>
+      <div class="float-chip c2"><b>Professionally cleaned</b><span>Consistent room standards</span></div>
+      <div class="float-chip c3"><b>Perth based</b><span>Locally managed stays</span></div>
+    </div>
+  </section>
+
+  <section class="stats-wrap">
+    <div class="shell stats">
+      <div class="stat"><b>4.79★</b><span>Average guest rating</span></div>
+      <div class="stat"><b>218</b><span>Guest reviews</span></div>
+      <div class="stat"><b>100%</b><span>Response rate</span></div>
+      <div class="stat"><b>&lt;1hr</b><span>Average reply time</span></div>
+    </div>
+  </section>
+
+  <section class="section" id="stays">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Places to stay</div>
+          <h2>Real rooms. Practical locations.</h2>
+        </div>
+        <p>Browse rooms by property. No portfolio-size claims, no clutter, just the stays guests can actually book.</p>
+      </div>
+
+      <div class="property">
+        <div class="property-top">
+          <div>
+            <h3>Gabriel Airport House</h3>
+            <div class="loc">Cloverdale, Western Australia</div>
+          </div>
+          <div class="meta">Free on-site parking · Shared kitchen · Self check-in</div>
+        </div>
+        <div class="rooms">
+          <article class="room">
+            <div class="room-img">
+              <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1555147618264351405/original/f4e30116-1833-45db-b3bc-654dfdb8039b.jpeg?im_w=720" alt="Cloverdale room">
+              <span class="tag">Double room</span>
+            </div>
+            <div class="room-body">
+              <h4>Private Double Room</h4>
+              <div class="info">Double bed · Shared bathroom · Lockable room</div>
+              <div class="room-foot"><span class="rating">★ 5.0</span><a class="link" target="_blank" href="https://www.airbnb.com/rooms/1555147618264351405">View room →</a></div>
+            </div>
+          </article>
+
+          <article class="room">
+            <div class="room-img">
+              <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1551992222841112554/original/1e94dc8b-c129-4ec1-a4d6-dcb9beaa5ef3.jpeg?im_w=720" alt="Cloverdale room">
+              <span class="tag">Double room</span>
+            </div>
+            <div class="room-body">
+              <h4>Private Double Room</h4>
+              <div class="info">Double bed · Shared bathroom · Quiet shared home</div>
+              <div class="room-foot"><span class="rating">★ 4.89</span><a class="link" target="_blank" href="https://www.airbnb.com/rooms/1551992222841112554">View room →</a></div>
+            </div>
+          </article>
+
+          <article class="room">
+            <div class="room-img">
+              <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1555150842011081817/original/f525d90b-a7d4-4558-b184-32c4546deaff.jpeg?im_w=720" alt="Cloverdale room">
+              <span class="tag">Double room</span>
+            </div>
+            <div class="room-body">
+              <h4>Private Double Room</h4>
+              <div class="info">Double bed · Shared bathroom · Short-stay friendly</div>
+              <div class="room-foot"><span class="rating">★ 4.8</span><a class="link" target="_blank" href="https://www.airbnb.com/rooms/1555150842011081817">View room →</a></div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="property">
+        <div class="property-top">
+          <div>
+            <h3>Airport Townhouse</h3>
+            <div class="loc">Redcliffe, Western Australia</div>
+          </div>
+          <div class="meta">Near Perth Airport · Central aircon · Shared kitchen</div>
+        </div>
+        <div class="rooms">
+          <article class="room">
+            <div class="room-img">
+              <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1518715919584479290/original/371ad33d-9938-446d-a5d9-2bcd402a9826.jpeg?im_w=720" alt="Redcliffe room">
+              <span class="tag">Queen room</span>
+            </div>
+            <div class="room-body">
+              <h4>Private Queen Room</h4>
+              <div class="info">Queen bed · Shared bathroom · Up to 2 guests</div>
+              <div class="room-foot"><span class="rating">★ 4.81</span><a class="link" target="_blank" href="https://www.airbnb.com/rooms/1518715919584479290">View room →</a></div>
+            </div>
+          </article>
+
+          <article class="room">
+            <div class="room-img">
+              <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1490495541156689366/original/fa586d87-d3fa-4614-bebc-aedb162b7d73.jpeg?im_w=720" alt="Redcliffe room">
+              <span class="tag">Queen room</span>
+            </div>
+            <div class="room-body">
+              <h4>Private Queen Room</h4>
+              <div class="info">Queen bed · Shared bathroom · Quiet townhouse</div>
+              <div class="room-foot"><span class="rating">★ 4.76</span><a class="link" target="_blank" href="https://www.airbnb.com/rooms/1490495541156689366">View room →</a></div>
+            </div>
+          </article>
+
+          <article class="room">
+            <div class="room-img">
+              <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1518695502879078861/original/af7f9c90-b09d-483b-a209-2526d8a215c3.jpeg?im_w=720" alt="Redcliffe ensuite room">
+              <span class="tag">Private ensuite</span>
+            </div>
+            <div class="room-body">
+              <h4>Queen Room with Ensuite</h4>
+              <div class="info">Queen bed · Private bathroom · Up to 2 guests</div>
+              <div class="room-foot"><span class="rating">★ 4.76</span><a class="link" target="_blank" href="https://www.airbnb.com/rooms/1518695502879078861">View room →</a></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="experience">
+    <div class="shell flow">
+      <div>
+        <div class="kicker">How AirStay works</div>
+        <h2>Less waiting. Less friction.</h2>
+        <p>From booking through arrival, the experience is built to be direct and practical, with room to add direct booking and automated guest flows later.</p>
+      </div>
+
+      <div class="flow-steps">
+        <div class="flow-step"><b>01</b><div><strong>Choose a room</strong><span>Browse the property and room that suit your stay.</span></div></div>
+        <div class="flow-step"><b>02</b><div><strong>Receive your details</strong><span>Access and arrival information before check-in.</span></div></div>
+        <div class="flow-step"><b>03</b><div><strong>Arrive when it suits you</strong><span>Simple self check-in without waiting for a front desk.</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="owners">
+    <div class="shell owner">
+      <div class="owner-visual">
+        <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1518715919584479290/original/371ad33d-9938-446d-a5d9-2bcd402a9826.jpeg?im_w=1200" alt="AirStay partner property">
+      </div>
+
+      <div class="owner-copy">
+        <div class="kicker" style="color:#2f6a52">Partner with AirStay</div>
+        <h2>Own a suitable investment property?</h2>
+        <p>
+          AirStay leases selected Perth properties for professionally operated short-stay accommodation.
+          If you are open to a business tenant and want a direct local point of contact, we would like to hear from you.
+        </p>
+
+        <div class="owner-grid">
+          <div class="owner-point">✓ One direct business tenant</div>
+          <div class="owner-point">✓ Professional cleaning standards</div>
+          <div class="owner-point">✓ Regular property oversight</div>
+          <div class="owner-point">✓ Local point of contact</div>
+          <div class="owner-point">✓ Clear written arrangements</div>
+          <div class="owner-point">✓ Property-by-property assessment</div>
+        </div>
+
+        <div class="owner-form">
+          <input placeholder="Property address">
+          <div class="row">
+            <input placeholder="Bedrooms">
+            <input placeholder="Bathrooms">
+          </div>
+          <div class="row">
+            <input placeholder="Your name">
+            <input placeholder="Phone">
+          </div>
+          <input placeholder="Email address">
+          <textarea placeholder="Tell us about the property"></textarea>
+          <a class="btn btn-primary" style="width:100%" href="mailto:airstayperth@gmail.com?subject=Property%20Assessment%20Request">Request property assessment</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="shell">
+      <div class="kicker">AirStayPerth</div>
+      <h2>Stay simple. Grow smart.</h2>
+      <p>Book a practical Perth stay or talk to AirStay about a property partnership.</p>
+      <div class="hero-actions" style="justify-content:center">
+        <a href="#stays" class="btn btn-primary">Explore stays</a>
+        <a href="#owners" class="btn btn-ghost">Partner with AirStay</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="shell footer-row">
+    <div><strong style="color:white">AirStayPerth</strong><br>Perth short-stay accommodation</div>
+    <div>Operated by AirStay Pty Ltd · ABN 77 298 430 340</div>
+  </div>
+</footer>
+
+<script>
+const stage = document.getElementById('stage');
+const scene = document.getElementById('scene');
+
+stage.addEventListener('mousemove', e=>{
+  const r=stage.getBoundingClientRect();
+  const x=(e.clientX-r.left)/r.width-.5;
+  const y=(e.clientY-r.top)/r.height-.5;
+  scene.style.transform=`rotateX(${6-y*9}deg) rotateY(${-12+x*18}deg) translateZ(8px)`;
+});
+stage.addEventListener('mouseleave',()=>{
+  scene.style.transform='rotateX(6deg) rotateY(-12deg)';
+});
+
+window.addEventListener('scroll',()=>{
+  const y=window.scrollY;
+  const shift=Math.min(y*0.03,18);
+  scene.style.filter=`brightness(${1+Math.min(y/9000,.06)})`;
+  document.querySelectorAll('.float-chip').forEach((el,i)=>{
+    el.style.transform=`translateY(${Math.sin((y/220)+(i*1.3))*5-shift*.18}px)`;
+  });
+},{passive:true});
+</script>
+
+</body>
+</html>
